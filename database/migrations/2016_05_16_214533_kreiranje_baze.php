@@ -50,7 +50,7 @@ class KreiranjeBaze extends Migration{
             $table->bigIncrements('id');
             $table->string('naziv', 120)->nullable();
             $table->string('slug', 200)->unique();
-            $table->string('radno_vreme')->nullable();
+            $table->text('radno_vrijeme')->nullable();
             $table->string('email')->nullable();
             $table->string('telefon')->nullable();
             $table->text('adresa')->nullable();

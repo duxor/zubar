@@ -1,0 +1,62 @@
+body{ background-color: #1c94c4 }
+.vertikalni-nav{
+    background-color: #1c94c4;
+    color: #fff;
+    padding: 0
+}
+.bw{
+    background-color: #fff;
+    min-height: 700px
+}
+.vertikalni-nav .panel-default>.panel-heading,.vertikalni-nav .panel{
+    background-color: #1c94c4;
+    border: none
+}
+.vertikalni-nav .panel-group .panel,.vertikalni-nav .panel>.list-group:first-child .list-group-item:first-child, .vertikalni-nav .panel>.panel-collapse>.list-group:first-child .list-group-item:first-child{ border-radius: 0 }
+.vertikalni-nav .panel-title:hover{ background-color: #fff }
+.panel-heading:hover{ color: #1c94c4 }
+.vertikalni-nav .panel>.panel-collapse>.list-group .list-group-item{
+    background-color: #1c94c4;
+    border:none
+}
+.vertikalni-nav .panel-title>.small,.vertikalni-nav .panel-title>.small>a, .vertikalni-nav .panel-title>a, .vertikalni-nav .panel-title>small, .vertikalni-nav .panel-title>small>a{
+    color: #fff;
+    text-decoration: none
+}
+.vertikalni-nav .panel-heading{ padding: 4px }
+.vertikalni-nav .panel-group{ margin-bottom: 0 }
+.vertikalni-nav .panel-group>.panel>.panel-collapse>ul>a{
+    color: #fff;
+    text-decoration: none
+}
+.copy{
+    position: absolute;
+    bottom: 0
+}
+.copy p{
+    font-size: 10px;
+    padding-top: 30px
+}
+.btn-c{ background-color: #1c94c4 }
+.btn-file{
+    position: relative;
+    overflow: hidden
+}
+.btn-file input[type=file]{
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block
+}
+.trumbowyg-box, .trumbowyg-editor{ width: 100% }
+img{ width: 100% }
+.mt20{ margin-top: 20px }
