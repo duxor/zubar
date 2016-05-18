@@ -20,7 +20,8 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'Vranje'],
         ]);
         Templejt::insert([
-            ['naziv'=>'Nedefinisan'],
+            ['naziv'=>'Tema 1','slug'=>'tema-1'],
+            ['naziv'=>'Tema 2','slug'=>'tema-2'],
         ]);
     }
 }

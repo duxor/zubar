@@ -14,6 +14,7 @@
     {!!Html::script('/js/bootstrap.min.js')!!}
     {!!Html::script('/js/moment.js')!!}
     {!!Html::script('/js/datetimepicker.js')!!}
+    {!!Html::script('/js/zubar-funkcije.js')!!}
 </head>
 <body data-target=".vertikalni-nav">
 <div class="col-sm-2 vertikalni-nav">
@@ -46,9 +47,9 @@
     </div>
     <div class="panel-group">
         <div class="panel panel-default panel-title">
-            <a href="/administracija/termini">
+            <a href="/administracija/neradni-dani">
                 <div class="panel-heading" id="headingOne">
-                    <h4><i class="glyphicon glyphicon-time"></i> Termini</h4>
+                    <h4><i class="glyphicon glyphicon-time"></i> Neradni dani</h4>
                 </div>
             </a>
         </div>

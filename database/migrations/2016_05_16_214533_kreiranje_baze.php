@@ -51,6 +51,7 @@ class KreiranjeBaze extends Migration{
             $table->string('naziv', 120)->nullable();
             $table->string('slug', 200)->unique();
             $table->text('radno_vrijeme')->nullable();
+            $table->text('neradni_dani')->nullable();
             $table->string('email')->nullable();
             $table->string('telefon')->nullable();
             $table->text('adresa')->nullable();
@@ -58,9 +59,18 @@ class KreiranjeBaze extends Migration{
             $table->string('y', 20)->nullable();
             $table->string('z', 20)->nullable();
             $table->unsignedInteger('templejt_id')->default(1);
-            $table->foreign('templejt_id')->references('id')->on('templejt');
             $table->unsignedInteger('grad_id')->default(1);
             $table->foreign('grad_id')->references('id')->on('grad');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
+        Schema::create('upotreba_templejta', function(Blueprint $table){
+            $table->bigIncrements('id');
+            $table->text('podaci')->nullable();
+            $table->unsignedInteger('templejt_id')->default(1);
+            $table->foreign('templejt_id')->references('id')->on('templejt');
+            $table->unsignedBigInteger('ordinacija_id');
+            $table->foreign('ordinacija_id')->references('id')->on('ordinacija');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
@@ -103,6 +113,7 @@ class KreiranjeBaze extends Migration{
     public function down(){
         Schema::drop('rezervacija');
         Schema::drop('usluga');
+        Schema::drop('upotreba_templejta');
         Schema::drop('ordinacija');
         Schema::drop('templejt');
         Schema::drop('korisnici');

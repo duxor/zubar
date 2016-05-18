@@ -18,19 +18,25 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 class AdministracijaSajtaC extends Controller{
+    public function dajPodatak($podatak){
+        return \App\Ordinacija::get($podatak)->first();
+    }
     public function getIndex(){
         return view('zubar.index');
     }
     public function postIndexInit(){
-        $ordinacija=\App\Ordinacija::first();
-        return $ordinacija->radno_vrijeme;
+        return $this->dajPodatak(['radno_vrijeme'])->radno_vrijeme;
     }
-    public function getTermini(){
-        return view('zubar.termini');
+    public function getNeradniDani(){
+        return view('zubar.neradni-dani')->with('neradni_dani',$this->dajPodatak(['neradni_dani'])->neradni_dani);
+    }
+    public function postNeradniDaniSacuvaj(){
+        Ordinacija::where('id',1)->update(['neradni_dani'=>Input::get('neradni_dani')]);
+        return 1;
     }
 
     public function postRadnoVrijemeSacuvaj(){
-        Ordinacija::where('id',1)->update(['radno_vrijeme'=>json_encode(json_decode(Input::get('radno_vrijeme')))]);
+        Ordinacija::where('id',1)->update(['radno_vrijeme'=>Input::get('radno_vrijeme')]);
         return 1;
     }
 }
