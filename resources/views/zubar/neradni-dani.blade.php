@@ -1,29 +1,10 @@
 @extends('zubar.master')
 @section('container')
     {!!Html::style('/css/year-calendar.css')!!}
-    {!!Html::style('/css/datetimepicker.css')!!}
     {!!Html::script('/js/year-calendar.js')!!}
-    {!!Html::script('/js/moment.js')!!}
-    {!!Html::script('/js/datetimepicker.js')!!}
     <h1>Neradni dani <button id="sacuvajPromjene" class="btn btn-warning"><i class="glyphicon glyphicon-floppy-disk"></i> Sačuvaj promene</button></h1>
     <hr>
     <div id="kalendar" style="margin-top:30px"></div>
-    <div class="modal modal-fade in" id="event-modal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">
-                        Pregled događaja
-                    </h4>
-                </div>
-                <div class="modal-body"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
         var nerad={
             currentYear: new Date().getFullYear(),
@@ -37,19 +18,6 @@
                 $(nerad.elementID).calendar({
                     enableRangeSelection: true,
                     style: 'background',
-                    colors:"#45A597",
-                    mouseOnDay: function(e){
-                        if(e.events.length > 0){
-                            var content = '';
-                            for(var i in e.events){
-                                content += '<div class="event-tooltip-content">'
-                                        + '<b>' + e.events[i].vreme + '</b>'
-                                        + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].naslov + '</div>'
-                                        + '<div class="event-location">' + e.events[i].mesto + '</div>'
-                                        + '</div><hr>'
-                            }
-                        }
-                    },
                     clickDay:function(e){
                         if(e.events.length > 0){
                             for(var i in e.events)
@@ -68,6 +36,7 @@
                     out.push({
                         id:i,
                         name:'Neradni dan',
+                        color:'#FF4A32',
                         startDate: new Date(nerad.currentYear, nerad.datumi[i][1], nerad.datumi[i][0]),
                         endDate: new Date(nerad.currentYear, nerad.datumi[i][1], nerad.datumi[i][0])
                     })
@@ -76,6 +45,7 @@
             dodajNeradniDan:function(datum, mjesec){
                 var event={
                     name: 'Neradni dan',
+                    color:'#FF4A32',
                     startDate: new Date(nerad.currentYear, mjesec, datum),
                     endDate: new Date(nerad.currentYear, mjesec, datum)
                 }

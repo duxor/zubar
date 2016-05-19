@@ -12,8 +12,9 @@ namespace App\Http\Controllers;
 |
 */
 use App\Ordinacija;
+use App\User as Korisnici;
+use App\Rezervacija;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
@@ -22,7 +23,8 @@ class AdministracijaSajtaC extends Controller{
         return \App\Ordinacija::get($podatak)->first();
     }
     public function getIndex(){
-        return view('zubar.index');
+        $usluge=['Lečenje zuba','Vađenje zuba','Poliranje zuba'];
+        return view('zubar.index')->with('usluge',$usluge);
     }
     public function postIndexInit(){
         return $this->dajPodatak(['radno_vrijeme'])->radno_vrijeme;
@@ -38,5 +40,20 @@ class AdministracijaSajtaC extends Controller{
     public function postRadnoVrijemeSacuvaj(){
         Ordinacija::where('id',1)->update(['radno_vrijeme'=>Input::get('radno_vrijeme')]);
         return 1;
+    }
+
+    public function postRezervacija(){
+        $id=Input::get('idPacijenta');
+        if(!$id){
+            $pacijent=Input::get('pacijent');
+            $pacijent['password']=bcrypt($pacijent['password']);
+            $pacijent['prava_pristupa_id']=2;
+            $id=Korisnici::insertGetId($pacijent);
+        }
+        $rezervacija=Input::get('rezervacija');
+        $rezervacija['korisnici_id']=$id;
+        $rezervacija['ordinacija_id']=1;/////****************************************
+        Rezervacija::insert($rezervacija);
+        return;
     }
 }

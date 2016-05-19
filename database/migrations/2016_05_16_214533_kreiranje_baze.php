@@ -24,8 +24,8 @@ class KreiranjeBaze extends Migration{
             $table->bigIncrements('id');
             $table->string('ime', 45)->nullable();
             $table->string('prezime', 45)->nullable();
-            $table->string('naziv', 120)->nullable();
-            $table->string('username', 200)->unique();
+            //$table->string('naziv', 120)->nullable();
+            //$table->string('username', 200)->unique();
             $table->string('password');
             $table->string('email')->unique();
             $table->string('pin', 10)->nullable();
@@ -35,6 +35,7 @@ class KreiranjeBaze extends Migration{
             $table->foreign('grad_id')->references('id')->on('grad');
             $table->unsignedInteger('prava_pristupa_id')->default(2);
             $table->foreign('prava_pristupa_id')->references('id')->on('prava_pristupa');
+            $table->string('foto', 250)->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
@@ -93,7 +94,7 @@ class KreiranjeBaze extends Migration{
             $table->unsignedBigInteger('korisnici_id')->default(1);
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
             $table->string('usluga_idevi',100)->nullable();
-            $table->unsignedBigInteger('ordinacija_id')->default(2);
+            $table->unsignedBigInteger('ordinacija_id');
             $table->foreign('ordinacija_id')->references('id')->on('ordinacija');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
