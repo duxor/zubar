@@ -35,6 +35,8 @@ class KreiranjeBaze extends Migration{
             $table->foreign('grad_id')->references('id')->on('grad');
             $table->unsignedInteger('prava_pristupa_id')->default(2);
             $table->foreign('prava_pristupa_id')->references('id')->on('prava_pristupa');
+            $table->boolean('confirmed')->default(0);
+            $table->string('confirmation_code')->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();

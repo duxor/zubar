@@ -13,12 +13,16 @@ class KonfiguracioniPodaci extends Seeder{
             ['naziv'=>'Zubar'],
             ['naziv'=>'Administrator'],
         ]);
-        Grad::insert(['naziv'=>'Nedefinisan']);
+        Grad::insert([
+            'naziv'=>'Niš',
+            'naziv'=>'Beograd',
+            'naziv'=>'Leskovac',
+        ]);
         Korisnici::insert(
             [
-                ['ime'=>'Pacijent','prezime'=>'Pacijentović','username'=>'pacijent','password'=>bcrypt('pacijent'),'email'=>'pacijent@ddsads.dsas'],
-                ['ime'=>'Zubar','prezime'=>'Zubarović','username'=>'zubar','password'=>bcrypt('zubar'),'email'=>'zubar@ddsads.dsas'],
-                ['ime'=>'Admin','prezime'=>'Administratović','username'=>'admin','password'=>bcrypt('admin'),'email'=>'admin@ddsads.dsas'],
+                ['ime'=>'Pacijent','prezime'=>'Pacijentović','username'=>'pacijent','password'=>bcrypt('pacijent'),'prava_pristupa_id'=>'2','email'=>'jovicsasajovic@gmail.com'],
+                ['ime'=>'Zubar','prezime'=>'Zubarović','username'=>'zubar','password'=>bcrypt('zubar'),'prava_pristupa_id'=>'3','email'=>'zubar@zubar.zub'],
+                ['ime'=>'Admin','prezime'=>'Administratović','username'=>'admin','password'=>bcrypt('admin'),'prava_pristupa_id'=>'4','email'=>'admin@admin.adm'],
             ]);
 
     }
