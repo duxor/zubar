@@ -18,6 +18,7 @@ Route::get('/login',[
     'as'=>'admin.login'
 ]);
 
+
 Route::post('/login',[
     'uses'=>'AdminController@postLogin',
     'as'=>'admin.login'
@@ -51,3 +52,4 @@ Route::post('password/reset','Auth\PasswordController@reset');
 //Route::controller('/administracija','AdministracijaSajtaC');
 //Route::controller('/super-administracija','SuperAdministracijaC');
 //Route::controller('/','OsnovniPrezenterC');
+

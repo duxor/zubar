@@ -24,8 +24,8 @@ class KreiranjeBaze extends Migration{
             $table->bigIncrements('id');
             $table->string('ime', 45)->nullable();
             $table->string('prezime', 45)->nullable();
-            $table->string('naziv', 120)->nullable();
-            $table->string('username', 200)->unique();
+            //$table->string('naziv', 120)->nullable();
+            //$table->string('username', 200)->unique();
             $table->string('password');
             $table->string('email')->unique();
             $table->string('pin', 10)->nullable();
@@ -37,6 +37,7 @@ class KreiranjeBaze extends Migration{
             $table->foreign('prava_pristupa_id')->references('id')->on('prava_pristupa');
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
+            $table->string('foto', 250)->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
@@ -52,7 +53,8 @@ class KreiranjeBaze extends Migration{
             $table->bigIncrements('id');
             $table->string('naziv', 120)->nullable();
             $table->string('slug', 200)->unique();
-            $table->string('radno_vreme')->nullable();
+            $table->text('radno_vrijeme')->nullable();
+            $table->text('neradni_dani')->nullable();
             $table->string('email')->nullable();
             $table->string('telefon')->nullable();
             $table->text('adresa')->nullable();
@@ -60,9 +62,18 @@ class KreiranjeBaze extends Migration{
             $table->string('y', 20)->nullable();
             $table->string('z', 20)->nullable();
             $table->unsignedInteger('templejt_id')->default(1);
-            $table->foreign('templejt_id')->references('id')->on('templejt');
             $table->unsignedInteger('grad_id')->default(1);
             $table->foreign('grad_id')->references('id')->on('grad');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+        });
+        Schema::create('upotreba_templejta', function(Blueprint $table){
+            $table->bigIncrements('id');
+            $table->text('podaci')->nullable();
+            $table->unsignedInteger('templejt_id')->default(1);
+            $table->foreign('templejt_id')->references('id')->on('templejt');
+            $table->unsignedBigInteger('ordinacija_id');
+            $table->foreign('ordinacija_id')->references('id')->on('ordinacija');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
         });
@@ -85,7 +96,7 @@ class KreiranjeBaze extends Migration{
             $table->unsignedBigInteger('korisnici_id')->default(1);
             $table->foreign('korisnici_id')->references('id')->on('korisnici');
             $table->string('usluga_idevi',100)->nullable();
-            $table->unsignedBigInteger('ordinacija_id')->default(2);
+            $table->unsignedBigInteger('ordinacija_id');
             $table->foreign('ordinacija_id')->references('id')->on('ordinacija');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();
@@ -105,6 +116,7 @@ class KreiranjeBaze extends Migration{
     public function down(){
         Schema::drop('rezervacija');
         Schema::drop('usluga');
+        Schema::drop('upotreba_templejta');
         Schema::drop('ordinacija');
         Schema::drop('templejt');
         Schema::drop('korisnici');
