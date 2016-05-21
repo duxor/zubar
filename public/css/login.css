@@ -1,0 +1,16 @@
+.panel-c{
+    border-color: #1c94c4;
+    margin-top:30px;
+}
+.panel-c>.panel-heading{
+    background-color: #1c94c4;
+    color: #fff;
+    border-color: #000;
+    font-weight: bold
+}
+.panel-c a{ color: #1c94c4 }
+.form-horizontal{ padding: 30px 0}
+.form-horizontal .form-group {
+    margin-right: 0;
+    margin-left: 0;
+}

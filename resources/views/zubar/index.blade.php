@@ -1,3 +1,4 @@
+
 @extends('zubar.master')
 @section('container')
     <h1>ZuboPanel</h1>
