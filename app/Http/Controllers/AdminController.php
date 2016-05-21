@@ -15,7 +15,9 @@ class AdminController extends Controller
         if(!Auth::check()){
             return redirect()->back();
         }
-        return view('zubar.index');
+        $usluge=['Lečenje zuba','Vađenje zuba','Poliranje zuba'];
+        return view('zubar.index')->with('usluge',$usluge);
+        //return view('zubar.index');
     }
     public function getPacijent()
     {
@@ -27,11 +29,11 @@ class AdminController extends Controller
     public function postLogin(Request $request)
     {
         $this->validate($request,[
-            'username'=>'required',
+            'email'=>'required',
             'password'=>'required'
         ]);
         $credentials = [
-            'username' => $request['username'],
+            'email' => $request['email'],
             'password' => $request['password'],
             'confirmed' => 1
         ];

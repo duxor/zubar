@@ -24,7 +24,6 @@
       <column name="id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="ime" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="prezime" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
-      <column name="naziv" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
       <column name="username" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
       <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -35,6 +34,7 @@
       <column name="prava_pristupa_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="Mg=="/>
       <column name="confirmed" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
       <column name="confirmation_code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="foto" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
       <column name="remember_token" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
       <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
@@ -62,7 +62,8 @@
       <column name="id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
       <column name="naziv" sqlType="VARCHAR" precision="120" scale="0" nullable="true" jdbcType="12"/>
       <column name="slug" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
-      <column name="radno_vreme" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="radno_vrijeme" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="neradni_dani" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="telefon" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="adresa" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
@@ -75,12 +76,11 @@
       <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="ordinacija_grad_id_foreign" columns="grad_id" ref-table="zubolog_grad" ref-schema="" ref-catalog="zubolog" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="ordinacija_templejt_id_foreign" columns="templejt_id" ref-table="zubolog_templejt" ref-schema="" ref-catalog="zubolog" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="rezervacija_ordinacija_id_foreign" table="zubolog_rezervacija" schema="" catalog="zubolog" columns="ordinacija_id"/>
+      <exported-key name="upotreba_templejta_ordinacija_id_foreign" table="zubolog_upotreba_templejta" schema="" catalog="zubolog" columns="ordinacija_id"/>
       <exported-key name="usluga_ordinacija_id_foreign" table="zubolog_usluga" schema="" catalog="zubolog" columns="ordinacija_id"/>
       <index name="ordinacija_slug_unique" unique="true" columns="slug"/>
       <index name="ordinacija_grad_id_foreign" unique="false" columns="grad_id"/>
-      <index name="ordinacija_templejt_id_foreign" unique="false" columns="templejt_id"/>
     </table>
     <table name="zubolog_password_resets" schema="" catalog="zubolog" type="TABLE">
       <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
@@ -105,7 +105,7 @@
       <column name="ocena" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
       <column name="korisnici_id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" def="MQ=="/>
       <column name="usluga_idevi" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
-      <column name="ordinacija_id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" def="Mg=="/>
+      <column name="ordinacija_id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
       <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
@@ -121,9 +121,22 @@
       <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="ordinacija_templejt_id_foreign" table="zubolog_ordinacija" schema="" catalog="zubolog" columns="templejt_id"/>
+      <exported-key name="upotreba_templejta_templejt_id_foreign" table="zubolog_upotreba_templejta" schema="" catalog="zubolog" columns="templejt_id"/>
       <index name="templejt_naziv_unique" unique="true" columns="naziv"/>
       <index name="templejt_slug_unique" unique="true" columns="slug"/>
+    </table>
+    <table name="zubolog_upotreba_templejta" schema="" catalog="zubolog" type="TABLE">
+      <column name="id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="podaci" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="templejt_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="ordinacija_id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="upotreba_templejta_ordinacija_id_foreign" columns="ordinacija_id" ref-table="zubolog_ordinacija" ref-schema="" ref-catalog="zubolog" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="upotreba_templejta_templejt_id_foreign" columns="templejt_id" ref-table="zubolog_templejt" ref-schema="" ref-catalog="zubolog" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="upotreba_templejta_ordinacija_id_foreign" unique="false" columns="ordinacija_id"/>
+      <index name="upotreba_templejta_templejt_id_foreign" unique="false" columns="templejt_id"/>
     </table>
     <table name="zubolog_usluga" schema="" catalog="zubolog" type="TABLE">
       <column name="id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>

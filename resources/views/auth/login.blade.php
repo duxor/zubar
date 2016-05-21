@@ -20,12 +20,12 @@
                     <form action="{{route('admin.login')}}" class="form-horizontal" role="form" method="POST">
                         {!! csrf_field() !!}
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Korisničko ime</label>
+                            <label class="col-md-4 control-label">Email</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Korisničko ime">
-                                @if ($errors->has('username'))
+                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Korisničko ime">
+                                @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
