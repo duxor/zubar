@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Zubolog</title>
     {!!Html::style('/css/bootstrap.min.css')!!}
-    {!!Html::style('/css/datetimepicker.css')!!}
     {!!Html::style('/css/basic-admin.css')!!}
     {!!Html::style('/css/fontello.css')!!}
     {!!Html::style('/css/animation.css')!!}
     {!!Html::script('/js/jquery-1.9.1.js')!!}
     {!!Html::script('/js/bootstrap.min.js')!!}
-    {!!Html::script('/js/moment.js')!!}
-    {!!Html::script('/js/datetimepicker.js')!!}
-    {!!Html::script('/js/zubar-funkcije.js')!!}
 </head>
 <body data-target=".vertikalni-nav">
 <div class="col-sm-2 vertikalni-nav">
@@ -38,36 +34,18 @@
     </div>
     <div class="panel-group">
         <div class="panel panel-default panel-title">
-            <a href="/administracija">
+            <a href="/karton">
                 <div class="panel-heading" id="headingOne">
-                    <h4><i class="glyphicon glyphicon-home"></i> Administracija</h4>
+                    <h4><i class="glyphicon glyphicon-home"></i> Karton</h4>
                 </div>
             </a>
         </div>
     </div>
     <div class="panel-group">
         <div class="panel panel-default panel-title">
-            <a href="/administracija/neradni-dani">
+            <a href="/karton/izmeni">
                 <div class="panel-heading" id="headingOne">
-                    <h4><i class="glyphicon glyphicon-time"></i> Neradni dani</h4>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="panel-group">
-        <div class="panel panel-default panel-title">
-            <a href="/administracija/galerija">
-                <div class="panel-heading" id="headingOne">
-                    <h4><i class="glyphicon glyphicon-time"></i> Galerija</h4>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="panel-group">
-        <div class="panel panel-default panel-title">
-            <a href="/administracija/zarada">
-                <div class="panel-heading" id="headingOne">
-                    <h4><i class="glyphicon glyphicon-euro"></i> Pregled zarade</h4>
+                    <h4><i class="glyphicon glyphicon-time"></i> Izmeni</h4>
                 </div>
             </a>
         </div>

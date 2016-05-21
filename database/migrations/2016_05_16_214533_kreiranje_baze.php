@@ -56,6 +56,7 @@ class KreiranjeBaze extends Migration{
             $table->string('email')->nullable();
             $table->string('telefon')->nullable();
             $table->text('adresa')->nullable();
+            $table->text('galerija')->nullable();
             $table->string('x', 20)->nullable();
             $table->string('y', 20)->nullable();
             $table->string('z', 20)->nullable();
@@ -88,7 +89,7 @@ class KreiranjeBaze extends Migration{
         });
         Schema::create('rezervacija', function(Blueprint $table){
             $table->bigIncrements('id');
-            $table->string('termin', 200)->nullable();
+            $table->timestamp('termin')->nullable();
             $table->text('dijagnoza')->nullable();
             $table->tinyInteger('ocena')->nullable();
             $table->unsignedBigInteger('korisnici_id')->default(1);

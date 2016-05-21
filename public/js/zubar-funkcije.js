@@ -1,3 +1,19 @@
+/*
+* sacuvanNiz=[
+ *   [
+ *       opseg: [d1 ?d2]
+ *       vrijeme:[t1 t2]
+ *   ],
+ *   [
+ *       opseg: [d3 ?d4]
+ *       vrijeme:[t3 t4]
+ *   ]
+ *   .
+ *   .
+ *   .
+* ];
+*
+* */
 var radnoVr={
     token:'',
     sacuvanNiz:[],

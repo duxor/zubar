@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\Ordinacija;
 use App\UpotrebaTemplejta;
+use App\Usluga;
+use App\Rezervacija;
 
 class OrdinacijaTestPodaci extends Seeder{
     public function run(){
@@ -21,5 +23,18 @@ class OrdinacijaTestPodaci extends Seeder{
             ['podaci'=>'','templejt_id'=>1,'ordinacija_id'=>1],
             ['podaci'=>'','templejt_id'=>2,'ordinacija_id'=>1],
         ]);
+        Usluga::insert([
+            ['naziv'=>'Lečenje zuba','vreme_realizacije'=>30,'cena'=>1000,'ordinacija_id'=>1],
+            ['naziv'=>'Vađenje zuba','vreme_realizacije'=>50,'cena'=>1200,'ordinacija_id'=>1],
+            ['naziv'=>'Poliranje zuba','vreme_realizacije'=>15,'cena'=>800,'ordinacija_id'=>1]
+        ]);
+        for($i=0;$i<51;$i++)
+            Rezervacija::insert(
+                [
+                    'termin'=>'2016-'.str_pad(rand(0,11),2,'0',STR_PAD_LEFT).'-'.str_pad(rand(0,28),2,'0',STR_PAD_LEFT).' '.str_pad(rand(7,15),2,'0',STR_PAD_LEFT).':'.str_pad(rand(0,59),2,'0',STR_PAD_LEFT),
+                    'korisnici_id'=>1,
+                    'usluga_idevi'=>json_encode([rand(1,3)]),
+                    'ordinacija_id'=>1
+                ]);
     }
 }

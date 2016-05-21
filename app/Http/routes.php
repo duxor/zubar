@@ -13,5 +13,6 @@
 
 Route::controller('/administracija','AdministracijaSajtaC');
 //Route::controller('/super-administracija','SuperAdministracijaC');
+Route::controller('/karton/{slug?}','KartonPrezenterC');
 Route::controller('/{slug}','PrezenterSajtaC');
 Route::controller('/','OsnovniPrezenterC');
